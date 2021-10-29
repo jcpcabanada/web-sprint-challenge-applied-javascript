@@ -1,3 +1,4 @@
+import axios from 'axios';
 const Card = (article) => {
   // TASK 5
   // ---------------------
@@ -10,13 +11,39 @@ const Card = (article) => {
   // <div class="card">
   //   <div class="headline">{ headline }</div>
   //   <div class="author">
-  //     <div class="img-container">
+  //     <div class="img-container"
   //       <img src={ authorPhoto }>
   //     </div>
   //     <span>By { authorName }</span>
   //   </div>
   // </div>
   //
+    const cardDiv = document.createElement('div');
+    const hedlineDiv = document.createElement('div');
+    const authorDiv = document.createElement('div');
+    const imgCont = document.createElement('div');
+    const authFoto = document.createElement('img');
+    const authName = document.createElement('span');
+
+    hedlineDiv.textContent = article.headline;
+    authFoto.src = article.authorPhoto;
+    authName.textContent = article.authorName;
+
+    cardDiv.classList.add('card');
+    hedlineDiv.classList.add('headline');
+    authorDiv.classList.add('author');
+    imgCont.classList.add('img-container');
+
+    cardDiv.append(hedlineDiv, authorDiv );
+    authorDiv.append( imgCont, authName );
+    imgCont.appendChild(authFoto);
+
+    let cardTags = document.getElementsByClassName('.card');
+    Array.from(cardTags).forEach( (cardTag) => {
+        cardTag.addEventListener('click', console.log(hedlineDiv))
+    } )
+
+    return cardDiv;
 }
 
 const cardAppender = (selector) => {
